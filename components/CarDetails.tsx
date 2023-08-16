@@ -5,12 +5,44 @@ import { generateCarImageURL } from "@/utils";
 import { Dialog, Transition } from "@headlessui/react";
 import Image from "next/image";
 import React, { Fragment, useState } from "react";
+import { CustomButton } from ".";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 // CarDetails component definition
 const CarDetails = ({ car, isOpen, closeModal }: carDetailsProps) => {
   // State to manage the currently displayed photo and border style
+  // console.log(car);
   const [photo, setPhoto] = useState(generateCarImageURL(car));
   const [border, setBorder] = useState("0");
+  const { data: session } = useSession();
+  const router = useRouter();
+  // console.log(session?.user);
+  const userEmail = (session as { user?: { email?: string } })?.user?.email;
+  const model = car.model;
+  const handleBook = async () => {
+    session ? router.push("/dashboard") : router.push("/login");
+
+    try {
+      const resCar = await fetch("api/carDetails", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          car,
+          model,
+          image: photo,
+          email: userEmail,
+        }),
+      });
+      if (resCar.ok) {
+        console.log("Car Details Added");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -149,6 +181,12 @@ const CarDetails = ({ car, isOpen, closeModal }: carDetailsProps) => {
                           </p>
                         </div>
                       ))}
+                      <CustomButton
+                        title="Book Now"
+                        containerStyles="w-full py-[16px] rounded-full bg-primary-blue"
+                        textStyles="text-white text-[14px] leading-[17px] font-bold"
+                        handleClick={handleBook}
+                      />
                     </div>
                   </div>
                 </Dialog.Panel>

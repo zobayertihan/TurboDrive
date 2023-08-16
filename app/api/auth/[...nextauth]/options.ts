@@ -1,3 +1,6 @@
+import bcrypt from "bcryptjs";
+import { connectmongoDB } from "@/lib/mongodb";
+import User from "@/models/user";
 import type { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -10,29 +13,33 @@ export const options: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
     CredentialsProvider({
-      name: "Credentials",
+      name: "credentials",
       credentials: {},
-      async authorize(credentials) {
-        const user = {
-          id: "01",
-          name: "user",
-          password: "123456",
-          role: "user",
-        };
-        return user;
+      async authorize(credentials: any) {
+        const { email, password } = credentials;
+
+        try {
+          await connectmongoDB();
+          const user = await User.findOne({ email });
+
+          if (!user) {
+            return null;
+          }
+
+          const matchPass = await bcrypt.compare(password, user.password);
+
+          if (!matchPass) {
+            return null;
+          }
+
+          return user;
+        } catch (error) {
+          console.log("Error: ", error);
+        }
       },
     }),
   ],
-  // callbacks: {
-  //   async jwt({ token, user }) {
-  //     if (user) token.role = user.role;
-  //     return token;
-  //   },
-  //   async session({ session, token }) {
-  //     if (session?.user) session.user.role = token.role;
-  //     return session;
-  //   },
-  // },
+
   pages: {
     signIn: "/login",
   },

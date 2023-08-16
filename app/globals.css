@@ -124,7 +124,7 @@
 } */
 
 .home-classWrapper {
-  @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14;
+  @apply grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full px-10 gap-8 pt-14;
 }
 
 /* .home__error-container {
@@ -139,7 +139,7 @@
 
 /* START: Car Card styles */
 .car-card {
-  @apply flex flex-col p-6 justify-center items-start text-black-100 bg-primary-blue-100 hover:bg-white hover:shadow-md rounded-3xl;
+  @apply flex flex-col p-6 justify-center items-start text-black-100 bg-primary-blue-100 hover:bg-white hover:shadow-md rounded-3xl flex-shrink;
 }
 
 /* .car-card__content {
@@ -329,4 +329,22 @@
   transform: translateY(-20px);
   transition: transform 0.3s ease;
   z-index: 10;
+}
+
+.caurosel {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  white-space: nowrap;
+  will-change: transform;
+  animation: hudai 5s linear infinite;
+  width: 100%;
+}
+@keyframes hudai {
+  from {
+    transform: translateX(12%);
+  }
+  to {
+    transform: translateX(-12%);
+  }
 }

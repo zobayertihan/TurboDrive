@@ -3,10 +3,13 @@
 import React from "react";
 import CustomButton from "./CustomButton"; // Import the CustomButton component
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // Hero component definition
 const Hero = () => {
+  const router = useRouter();
   const handleScroll = () => {
+    router.push("/allcars");
     // Handle scroll logic (not provided in the code)
   };
 

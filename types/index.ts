@@ -76,3 +76,18 @@ export interface userProps {
   email?: string;
   pass?: string;
 }
+
+export interface userDetailsProps {
+  name?: string;
+  phone?: string;
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+}
+
+export interface oneCarDetailsProps {
+  car?: Object;
+  model: string;
+  image: string;
+  email: string;
+}

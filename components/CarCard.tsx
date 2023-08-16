@@ -36,7 +36,7 @@ const CarCard = ({ car }: carCardProps) => {
 
   return (
     // Car card container
-    <div className="car-card group transition-all duration-500">
+    <div className="car-card group transition-all duration-500 contents">
       {/* Car make and model */}
       <div className="carCardContent">
         <h2 className="carCardContentTitle">

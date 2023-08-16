@@ -21,6 +21,23 @@ export async function fetchCars(filters: FilterProps) {
   return result; // Return the fetched car data
 }
 
+export async function fetchAllCars(filters: FilterProps) {
+  const { manufacturer, year, fuel, limit, model } = filters;
+  const headers = {
+    "X-RapidAPI-Key": process.env.XRapidAPIKey || "",
+    "X-RapidAPI-Host": process.env.XRapidAPIHost || "",
+  };
+  const response = await fetch(
+    `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
+    {
+      headers: headers,
+    }
+  );
+
+  const result = await response.json(); // Parse the response body as JSON
+  return result; // Return the fetched car data
+}
+
 // Calculate estimated car rental rate per day
 export const calculateCarRent = (city_mpg: number, year: number) => {
   const bestPrizePerDay = 50;

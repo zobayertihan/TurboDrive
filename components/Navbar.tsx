@@ -6,6 +6,7 @@ import React, { useContext } from "react";
 import CustomButton from "./CustomButton"; // Import the CustomButton component
 import { useRouter } from "next/navigation"; // Import the useRouter hook
 import { signIn, signOut, useSession } from "next-auth/react";
+// import { disconnectMongoDB } from "@/lib/mongodb";
 
 // Navbar component definition
 const Navbar = () => {
@@ -21,8 +22,9 @@ const Navbar = () => {
   const handleLogin = () => {
     signIn();
   };
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     signOut();
+    // await disconnectMongoDB();
   };
 
   return (
@@ -40,8 +42,10 @@ const Navbar = () => {
           />
         </Link>
         {session ? (
-          <div>
-            <p className="text-black">{myData?.name}</p>
+          <div className="flex justify-center items-center">
+            <Link href={"/dashboard"}>
+              <p className="text-primary-blue">{myData?.name}</p>
+            </Link>
             <CustomButton
               title={"Sign Out"}
               containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
