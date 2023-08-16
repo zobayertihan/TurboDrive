@@ -91,3 +91,8 @@ export interface oneCarDetailsProps {
   image: string;
   email: string;
 }
+
+export interface CarProps {
+  searchParams: FilterProps;
+  allCars: any[]; // Replace 'any' with your actual car type
+}
