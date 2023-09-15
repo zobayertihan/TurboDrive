@@ -36,7 +36,7 @@ const Slider = ({ allCars }: any) => {
         {allCars.map((car: any) => (
           <div key={car}>
             <SwiperSlide className="py-10">
-              <CarCard key={car} car={car} />
+              <CarCard car={car} />
             </SwiperSlide>
           </div>
         ))}

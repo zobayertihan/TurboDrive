@@ -17,6 +17,7 @@ const Navbar = () => {
     image: "string";
   };
   const { data: session } = useSession();
+  console.log(session);
   const myData: any = session?.user;
   // Function to handle login button click
   const handleLogin = () => {

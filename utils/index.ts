@@ -6,6 +6,7 @@ import { flushSync } from "react-dom"; // Import the 'flushSync' function from t
 // Asynchronously fetch car data based on provided filters
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, fuel, limit, model } = filters;
+  // console.log("Now", manufacturer, year, fuel, limit, model);
   const headers = {
     "X-RapidAPI-Key": process.env.XRapidAPIKey || "",
     "X-RapidAPI-Host": process.env.XRapidAPIHost || "",
@@ -13,6 +14,7 @@ export async function fetchCars(filters: FilterProps) {
   const response = await fetch(
     `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?make=${manufacturer}&year=${year}&model=${model}&limit=${limit}&fuel_type=${fuel}`,
     {
+      cache: "force-cache",
       headers: headers,
     }
   );

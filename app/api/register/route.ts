@@ -1,7 +1,6 @@
 import { connectmongoDB } from "@/lib/mongodb";
 import User from "@/models/user";
 import { userDetailsProps } from "@/types";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 

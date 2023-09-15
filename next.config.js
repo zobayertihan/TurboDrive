@@ -4,6 +4,7 @@ const nextConfig = {
   // output: "export",
   images: {
     domains: ["cdn.imagin.studio"],
+    unoptimized: true,
   },
   typescript: {
     ignoreBuildErrors: true,

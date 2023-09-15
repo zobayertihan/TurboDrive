@@ -7,7 +7,6 @@ export const connectmongoDB = async () => {
       return console.log("MongoDB is not Defiened");
     }
     await mongoose.connect(mongoDB);
-    // console.log("MongoDB is Connected");
   } catch (error) {
     console.log("MongoDB is not Connected. Error: ", error);
   }

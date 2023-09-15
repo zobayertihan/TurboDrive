@@ -42,11 +42,11 @@ export interface carDetailsProps {
 
 // Props for filtering cars
 export interface FilterProps {
-  manufacturer?: string; // Manufacturer filter
-  year?: number; // Year filter
-  fuel?: string; // Fuel type filter
-  limit?: number; // Limit of results
-  model?: string; // Model filter
+  manufacturer?: string | undefined; // Manufacturer filter
+  year?: number | undefined; // Year filter
+  fuel?: string | undefined; // Fuel type filter
+  limit?: number | undefined; // Limit of results
+  model?: string | undefined; // Model filter
 }
 
 // Props for an option in a select filter
